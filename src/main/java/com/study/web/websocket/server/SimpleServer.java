@@ -5,18 +5,25 @@ import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint("/websocket/server")
+@ServerEndpoint("/websocket/server/{room-no}")
 public class SimpleServer {
 
     static CopyOnWriteArraySet<Session> sessions = new CopyOnWriteArraySet<>();
+//    static HashMap<String, List<Session>> map = new HashMap<>();
+//    static {
+//        map.put("101", new CopyOnWriteArrayList());
+//        map.put("102", new CopyOnWriteArrayList());
+//        map.put("103", new CopyOnWriteArrayList());
+//    }
 
     @OnOpen
-    public void onOpen(Session session) {
+    public void onOpen(Session session, @PathParam("room-no") String roomNo) {
         System.out.println("接到連線, sessionID: " + session.getId());
         sessions.add(session);
-        sendAll("歡迎 sessionID: " + session.getId() + " 加入");
+        sendAll("歡迎 sessionID: " + session.getId() + " 加入 roomNo: " + roomNo);
     }
 
     @OnMessage
