@@ -1,0 +1,44 @@
+
+<html>
+    <head>
+        <title>Do Header</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+         <script>
+             function getHeader(){
+                  $.ajax({
+                    type: 'HEAD',
+                    url: '../servlet/download?fn=cat.jpg',
+                    success: function (data, status, xhr) {
+                        var response = "<b>data:</b> " + data + "<br/>";
+                        response += "<b>headers:</b> <br/>";
+                        $.each(xhr.getAllResponseHeaders().split("\n"),
+                                function (i, value) {
+                                    response += value + " <br/>";
+                                });
+                        $('#header-content').html(response)
+                    },
+                    error: function (xhr, status, error) {
+                        $('#header-content').html('<span style=\'color:red;\'>' + error + '</span>')
+                    }
+                });
+            }
+            
+            function download(){
+                window.location.href = '../servlet/download?fn=cat.jpg';
+            }
+            function view(){
+                $('#view-img').attr('src','../servlet/download?fn=cat.jpg');
+            } 
+             
+         </script>
+    </head>
+    <body>
+        <button class="pure-button pure-button-primary" onclick="getHeader()">Header Request</button>
+        <button class="pure-button pure-button-primary" onclick="download()">Download</button>        
+        <button class="pure-button pure-button-primary" onclick="view()">view</button>        
+        <div id="header-content"></div>
+        <img id="view-img">
+    </body>
+</html>
