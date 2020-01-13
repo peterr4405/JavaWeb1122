@@ -27,7 +27,7 @@ public class StockTag extends SimpleTagSupport {
         BigDecimal price = stock.getQuote().getPrice();
         JspWriter out = this.getJspContext().getOut();
         out.println(symbol + ": $" + price);
-        
+
     }
 
 }
