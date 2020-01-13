@@ -64,6 +64,12 @@
             <artifactId>tyrus-standalone-client-jdk</artifactId>
             <version>1.13</version>
         </dependency>
+        
+        <dependency>
+            <groupId>com.yahoofinance-api</groupId>
+            <artifactId>YahooFinanceAPI</artifactId>
+            <version>3.15.0</version>
+        </dependency>
 
     </dependencies>
 
